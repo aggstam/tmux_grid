@@ -3,7 +3,7 @@
 #
 # Simple script to generate a new tmux session in grid layout.
 # All generated panes will have the same size.
-# Usage:    ./tmux_grid.sh {vertical panes} {horizontal panes}
+# Usage: ./tmux_grid.sh {vertical panes} {horizontal panes}
 #
 # Author: Aggelos Stamatiou, July 2022
 #
