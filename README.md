@@ -3,11 +3,11 @@ Simple script to generate a new tmux session in grid layout.
 <br>
 All generated panes will have the same size.
 
-# Dependencies
+## Dependencies
 The following packages must be installed in your system:
 1. tmux
 
-# Usage:
+## Usage:
 ```
 ./tmux_grid.sh {vertical panes} {horizontal panes}
 ```
