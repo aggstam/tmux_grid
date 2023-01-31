@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # --------------------------------------------------------------------------
 #
 # Simple script to generate a new tmux session in grid layout.
@@ -24,6 +24,7 @@
 # Auxiliary function to display usage message
 usage() {
     echo "Usage: ./tmux_grid.sh {vertical panes} {horizontal panes}"
+    exit 1
 }
 
 # Auxiliary function to validate input parameters
@@ -31,34 +32,32 @@ validate() {
     if [ -z "$1" ]; then
         echo "Vertical panes not provided."
         usage
-        exit
     fi
     
     if [ -z "$2" ]; then
         echo "Horizontal panes not provided."
         usage
-        exit
     fi
     
-    if [ $1 -le 0 ] || [ $2 -le 0 ]; then
+    if [ "$1" -le 0 ] || [ "$2" -le 0 ]; then
         echo "Input numbers must be positive."
-        exit
+        usage
     fi
 }
 
 # Validate input parameters
 v=$1
 h=$2
-validate $v $h
+validate "$v" "$h"
 
 # Initialize tmux session
 tmux new-session -d
 
 # Horizontal split
-h_bound=$(($h-1))
-if [ $h -gt 1 ]; then
+h_bound=$(( h - 1 ))
+if [ "$h" -gt 1 ]; then
     # Since tmux already creates a pane, we generate h-1
-    for i in $(eval echo "{1..$h_bound}")
+    for i in $(seq 1 $h_bound)
     do
         tmux split-window -h
     done
@@ -67,22 +66,22 @@ if [ $h -gt 1 ]; then
 fi
 
 # Vertical split
-if [ $v -gt 1 ]; then
+if [ "$v" -gt 1 ]; then
     # Since we used the even-horizontal layout,
     # we have to split in vertical orientation each of
     # the generated panes, using the pane height in lines.
     tmux select-pane -t 0
     v_total=$(tmux display-message -p '#{pane_height}')
-    v_size=$(($v_total/$v))
-    v_bound=$(($v-1))
-    for i in $(eval echo "{0..$h_bound}")
+    v_size=$(( v_total /  v ))
+    v_bound=$(( v - 1 ))
+    for i in $(seq  0 $h_bound)
     do
         # Each time we generate a new pane, rest panes
         # index moves, so we need to always select the first
         # pane of the horizontal line we split.
-        pane=$(($i*$v))
+        pane=$(( i * v ))
         tmux select-pane -t $pane
-        for j in $(eval echo "{1..$v_bound}")
+        for j in $(seq 1 $v_bound)
         do
             tmux split-window -l $v_size -v
             tmux select-pane -t $pane
