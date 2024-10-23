@@ -9,5 +9,5 @@ The following packages must be installed in your system:
 
 ## Usage:
 ```
-./tmux_grid.sh {vertical panes} {horizontal panes}
+./tmux_grid.sh {vertical panes} {horizontal panes} {optional session name}
 ```

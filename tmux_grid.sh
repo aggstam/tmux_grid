@@ -51,7 +51,11 @@ h=$2
 validate "$v" "$h"
 
 # Initialize tmux session
-tmux new-session -d
+session=$3
+if [ -z $session ]; then
+    session=tmux-grid
+fi
+tmux new-session -d -s $session
 
 # Horizontal split
 h_bound=$(( h - 1 ))
