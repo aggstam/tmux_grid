@@ -23,7 +23,7 @@
 
 # Auxiliary function to display usage message
 usage() {
-    echo "Usage: ./tmux_grid.sh {vertical panes} {horizontal panes}"
+    echo "Usage: ./tmux_grid.sh {vertical panes} {horizontal panes} {optional session name}"
     exit 1
 }
 
