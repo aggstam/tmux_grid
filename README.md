@@ -8,6 +8,6 @@ The following packages must be installed in your system:
 1. tmux
 
 ## Usage:
-```
-./tmux_grid.sh {vertical panes} {horizontal panes} {optional session name}
+```shell
+$ ./tmux_grid.sh {vertical panes} {horizontal panes} {optional session name}
 ```
